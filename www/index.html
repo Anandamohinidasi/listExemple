@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/autocomplete.scss">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script type="text/javascript" src="js/autocomplete.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="starter" ng-controller="MyCtrl">
+
+    <ion-pane>
+      <ion-header-bar class="bar-royal">
+        <button class="button button-icon icon ion-ios-minus-outline" ng-click="delete()"></button>
+        <h1 class="title">Grossery list simple exemple</h1>
+        <button class="button button-icon icon ion-ios-plus-outline" ng-click="modal.show()"></button>
+      </ion-header-bar>
+      <ion-content>
+        <ion-list show-delete="shouldShowDelete" can-swipe="listCanSwipe">
+          <ion-item ng-repeat="item in contacts" class="item-avatar-left">
+            <img ng-src="{{item.img}}">
+            <h2>{{item.title}}</h2>
+            <p>{{item.description}}</p>
+            <ion-option-button class="button-positive" ng-click="edit(item)">
+              Edit 
+            </ion-option-button>
+            <ion-delete-button class="ion-minus-circled" ng-click="contacts.splice($index, 1)">
+            </ion-delete-button>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-pane>
+    <script id="templates/modal.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-royal">
+          <h1 class="title">New Grocery</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Title</span>
+              <autocomplete ng-model="newUser.firstName" data="movies" on-type="updateMovies"></autocomplete>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Description</span>
+              <input ng-model="newUser.lastName" type="text">
+            </label>
+            <button class="button button-full button-balanced" ng-click="createContact(newUser)">Create</button>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+  </body>
+</html>
